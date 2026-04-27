@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  stridesync-app:
+    build: .
+    ports:
+      - "8081:8081" # Porta do Metro Bundler
+    volumes:
+      - .:/app
+      - /app/node_modules # Evita sobrescrever os node_modules do container com o local
+    environment:
+      - EXPO_USE_V2_RESOLVER=1
+      - CHOKIDAR_USEPOLLING=true # Necessário para hot-reload funcionar via Docker
+    command: npm run start
